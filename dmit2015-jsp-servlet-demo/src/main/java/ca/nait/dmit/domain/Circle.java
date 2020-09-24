@@ -8,13 +8,32 @@ package ca.nait.dmit.domain;
  * @version 2018.01.18
  */
 public class Circle {
+	
+	/**
+	 * Return 10 circles where the radius increments by 1 from the current value
+	 * @return an array of circles
+	 */
+	public Circle[] next10Circles() {
+		final int MAX_CIRCLES = 10;
+		// Create a new array of Circle
+		Circle[] circleArray = new Circle[MAX_CIRCLES];
+		double currentRadius = radius;
+		for (int index = 0; index < MAX_CIRCLES; index += 1) {
+			// Create a single Circle
+			Circle currentCircle = new Circle(currentRadius++);
+			// Add the currentCircle to circleArray
+			circleArray[index] = currentCircle;
+		}
+		return circleArray;
+	}
+	
 
 	/** The radius of the circle */
 	private double radius;
 
-	/** Construct a circle with a radius 0 */
+	/** Construct a circle with a radius 1 */
 	public Circle() {
-		radius = 0;
+		radius = 1;
 	}
 
 	/** Construct a circle with a specified radius */
