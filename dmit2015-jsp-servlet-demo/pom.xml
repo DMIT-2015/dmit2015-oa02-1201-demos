@@ -75,6 +75,15 @@
       <version>${mockito-core.version}</version>
       <scope>test</scope>
     </dependency>
+    
+    <!-- JSON P Provider for Integration Testing -->
+<dependency>
+    <groupId>org.glassfish</groupId>
+    <artifactId>jakarta.json</artifactId>
+    <version>1.1.6</version>
+    <scope>test</scope>
+</dependency>
+
   </dependencies>
 
   <build>
