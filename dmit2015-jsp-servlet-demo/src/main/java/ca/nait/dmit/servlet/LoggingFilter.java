@@ -14,7 +14,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 
-@WebFilter("/*")
+//@WebFilter("/*")
+@WebFilter(urlPatterns = {"*.xhtml","*.jsp"})
 public class LoggingFilter implements Filter {
 
 	private FilterConfig filterConfig = null;
