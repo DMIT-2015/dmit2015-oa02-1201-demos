@@ -1,5 +1,7 @@
 package ca.nait.dmit.domain;
 
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Pattern;
 
 /**
  * The Circle class models a circle shape.
@@ -29,6 +31,10 @@ public class Circle {
 	
 
 	/** The radius of the circle */
+	@Pattern(regexp = "/^\\d*\\.?\\d*$/", message="The radius must be a decimal number")
+	private String radiusString;
+	
+	@DecimalMin(value = "1", message = "The radius of the circle must be equal or greater than {value}")
 	private double radius;
 
 	/** Construct a circle with a radius 1 */
@@ -56,7 +62,23 @@ public class Circle {
 	 * @param radius The value to store in the radius field
 	 */
 	public void setRadius(double newRadius) {
+//		if (newRadius > 0.5) {
+//			this.radius = newRadius;			
+//		} else {
+//			throw new RuntimeException("The radius of the circle must be greater than 0.5");
+//		}
+		
+		
 		this.radius = newRadius;
+	}
+
+	
+	public String getRadiusString() {
+		return radiusString;
+	}
+
+	public void setRadiusString(String radiusString) {
+		this.radiusString = radiusString;
 	}
 
 	/**
@@ -86,4 +108,6 @@ public class Circle {
 	public double circumference() {
 		return 2 * Math.PI * radius;
 	}
+	
+	
 }
