@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+>
+<h:head>
+    <!-- Bootstrap required meta tags -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <title>circle</title>
+</h:head>
+
+<h:body>
+    <b:jumbotron>
+        <h1>Circle Calculator</h1>
+    </b:jumbotron>
+
+    <b:messages id="messages" />
+
+    <b:form>
+
+        <b:inputText id="radius"
+                     label="Radius"
+                     value="#{circleObjectController.currentCircle.radius}"
+                     />
+
+        <h:commandButton value="Calculate Area" styleClass="btn btn-primary"
+            action="#{circleObjectController.area}">
+            <f:ajax execute="@form" render=":messages radius" />
+        </h:commandButton>
+
+        <h:commandButton value="Calculate Circumference"
+             action="#{circleObjectController.circumference}">
+            <f:ajax execute="@form" render="@all" />
+        </h:commandButton>
+
+        <b:commandButton value="Calculate Diameter"
+                         look="primary"
+                         iconAwesome="thumbs-up"
+             action="#{circleObjectController.diameter()}"
+             update=":messages radius">
+        </b:commandButton>
+
+    </b:form>
+
+    <footer>
+        user2015 2020-10-23
+    </footer>
+</h:body>
+
+</html>
