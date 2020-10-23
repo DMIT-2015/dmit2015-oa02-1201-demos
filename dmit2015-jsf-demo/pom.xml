@@ -18,9 +18,18 @@
         <version.omnifaces>3.8</version.omnifaces>
         <version.primefaces>8.0</version.primefaces>
         <version.bootsfaces>1.5.0</version.bootsfaces>
+
+        <version.lombok>1.18.16</version.lombok>
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${version.lombok}</version>
+            <scope>provided</scope>
+        </dependency>
 
         <dependency>
             <groupId>org.omnifaces</groupId>

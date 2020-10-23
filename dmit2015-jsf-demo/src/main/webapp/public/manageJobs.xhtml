@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+>
+<h:head>
+    <!-- Bootstrap required meta tags -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <title>manageJobs</title>
+</h:head>
+
+<h:body>
+    <h1>manageJobs</h1>
+
+    <b:messages id="messages" />
+
+    <b:form>
+        <b:inputText id="jobId"
+                     label="JobID"
+                     value="#{manageJobController.currentJob.jobId}"
+                     />
+        <b:inputText id="jobTitle"
+                     label="Job Title"
+                     value="#{manageJobController.currentJob.jobTitle}"
+        />
+        <b:inputText id="minSalary"
+                     label="Minimum Salary"
+                     value="#{manageJobController.currentJob.minimumSalary}"
+        />
+        <b:inputText id="maxSalary"
+                     label="Maximum Salary"
+                     value="#{manageJobController.currentJob.maximumSalary}"
+        />
+        <h:commandButton value="Add Job"
+            action="#{manageJobController.addJob}">
+
+        </h:commandButton>
+
+        <b:dataTable id="jobsTable" value="#{manageJobController.jobs}" var="currentJob">
+            <b:dataTableColumn label="JobID" value="#{currentJob.jobId}" />
+
+            <b:dataTableColumn label="Job Title" value="#{currentJob.jobTitle}" />
+
+            <b:dataTableColumn label="Minimum Salary" value="#{currentJob.minimumSalary}" />
+
+            <b:dataTableColumn label="Maximum Salary" value="#{currentJob.maximumSalary}" />
+        </b:dataTable>
+
+
+    </b:form>
+
+    <footer>
+        user2015 2020-10-23
+    </footer>
+</h:body>
+
+</html>
