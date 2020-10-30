@@ -76,6 +76,11 @@
             <b:dataTableColumn label="Purchase Price" value="#{currentGame.purchasePrice}" />
 
             <b:dataTableColumn label="Action">
+            	<b:link outcome="editGame" look="info" icon-awesome="edit">
+            		<f:param name="editId" value="#{currentGame.gameId}" />
+            		edit
+            	</b:link>
+<f:verbatim>
                 <b:commandButton value="Delete Game"
                                  look="danger"
                                  iconAwesome="trash"
@@ -83,7 +88,11 @@
                                  immediate="true"
                                  ajax="false"
                                  action="#{gameCreateAndListController.deleteGame(currentGame.gameId)}" />
+</f:verbatim>            
+				
             </b:dataTableColumn>
+            
+            
         </b:dataTable>
     </b:form>
 
