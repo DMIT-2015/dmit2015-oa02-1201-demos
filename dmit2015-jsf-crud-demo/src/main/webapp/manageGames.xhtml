@@ -31,41 +31,41 @@
         <b:inputText
                 id="gameTitle"
                 label="Game Title"
-                value="#{gameCreateAndListController.currentGame.title}"
+                value="#{currentGameCreateAndListController.currentGame.title}"
         >
         </b:inputText>
 
         <b:inputText
                 id="platform"
                 label="Game Platform"
-                value="#{gameCreateAndListController.currentGame.platform}"
+                value="#{currentGameCreateAndListController.currentGame.platform}"
         >
         </b:inputText>
 
         <b:inputText
                 id="purchasePrice"
                 label="Purhcase Price"
-                value="#{gameCreateAndListController.currentGame.purchasePrice}"
+                value="#{currentGameCreateAndListController.currentGame.purchasePrice}"
         >
         </b:inputText>
 
         <b:inputText
                 id="purchaseDate"
                 label="Purhcase Date"
-                value="#{gameCreateAndListController.currentGame.purchaseDate}"
+                value="#{currentGameCreateAndListController.currentGame.purchaseDate}"
         >
             <f:convertDateTime type="localDate" pattern="yyyy-MM-dd" />
         </b:inputText>
 
         <b:commandButton value="Add Game"
-                         action="#{gameCreateAndListController.addGame()}"
+                         action="#{currentGameCreateAndListController.addGame()}"
                          ajax="false">
         </b:commandButton>
     </b:form>
 
     <b:form>
 
-        <b:dataTable id="gamesTable" value="#{gameCreateAndListController.games}" var="currentGame">
+        <b:dataTable id="gamesTable" value="#{currentGameCreateAndListController.games}" var="currentGame">
 
             <b:dataTableColumn label="Game Title" value="#{currentGame.title}" />
 
@@ -73,7 +73,7 @@
 
             <b:dataTableColumn label="Purchase Date" value="#{currentGame.purchaseDate}" />
 
-            <b:dataTableColumn label="Purchase Price" value="#{currentGame.purchasePrice}" />
+            <b:dataTableColumn label="Purchase Price" value="#{of:formatCurrency(currentGame.purchasePrice, '$')}" />
 
             <b:dataTableColumn label="Action">
             	<b:link outcome="editGame" look="info" icon-awesome="edit">
@@ -87,7 +87,7 @@
                                  onclick="return confirm('Are you sure you want to delete this item?')"
                                  immediate="true"
                                  ajax="false"
-                                 action="#{gameCreateAndListController.deleteGame(currentGame.gameId)}" />
+                                 action="#{currentGameCreateAndListController.deleteGame(currentGame.gameId)}" />
 </f:verbatim>            
 				
             </b:dataTableColumn>

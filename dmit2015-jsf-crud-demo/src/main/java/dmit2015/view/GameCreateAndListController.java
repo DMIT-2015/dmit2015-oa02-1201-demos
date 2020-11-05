@@ -13,7 +13,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
-@Named
+@Named("currentGameCreateAndListController")
 @ViewScoped
 public class GameCreateAndListController implements Serializable {
 
