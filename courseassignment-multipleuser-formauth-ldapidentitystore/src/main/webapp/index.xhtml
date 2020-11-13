@@ -1,0 +1,128 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+    xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+    xmlns:jsf="http://xmlns.jcp.org/jsf"
+    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+    xmlns:o="http://omnifaces.org/ui"
+    xmlns:of="http://omnifaces.org/functions"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:b="http://bootsfaces.net/ui"
+    template="/WEB-INF/jsf-templates/course-assignments-bootsfaces-template.xhtml"
+>
+
+    <ui:param name="title" value="Course Assignments" />
+
+    <ui:define name="maincontent">
+
+        <b:jumbotron>
+            <h1>Single User System - Custom Auth with LDAP Identity Store</h1>
+        </b:jumbotron>
+
+        <p>You can use this webapp the manage your course assignments. The main menu has options for you to create and list course assignments. </p>
+
+        <div id="app" class="container">
+
+            <div v-if="message" v-html="message" id="message" class="alert alert-success" role="alert" >
+            </div>
+
+            To run this app you must first power on the Windows Sever 2016 VM for LDAP to connect to.
+            The <strong>url</strong> used by <strong>@LdapIdentityStoreDefinition</strong> contains the IP of your Windows Server 2016 VM.
+            You can use any of the following accounts to login.
+            All accounts have the same password <strong>Password2015</strong>.
+
+            <table  id="resultList" class="table table-sm table-striped table-hover" >
+                <thead>
+                <tr>
+                    <th class="text-left">Logon Name</th>
+                    <th class="text-left">Department</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="item in resultList">
+                    <td class="text-left">{{ item.LogonName }}</td>
+                    <td class="text-left">{{ item.Department }}</td>
+                </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+    </ui:define>
+
+    <ui:define name="bodyscripts">
+        <!-- Vue.js Dependencies -->
+        <!-- development version, includes helpful console warnings -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <!-- production version, optimized for size and speed -->
+        <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+
+        <!-- PapaPrase CSV https://github.com/mholt/PapaParse -->
+        <script src="https://unpkg.com/papaparse@5.3.0/papaparse.min.js"></script>
+
+        <script type="text/javascript">
+
+            var app = new Vue({
+                // The element for Vue to control
+                el: '#app',
+
+                // A list of variables separated by a comma to use with Vue
+                // A variable consists of a name followed by a colon and an initial javascript value (string, array, number, true/false)
+                data: {
+                    message:	'',
+                    //messages:	[],
+                    resultList: [],
+                },
+
+                // Vue LifeCyle Hooks methods that you can define: created, mounted, updated, destroyed
+                mounted: function() {
+                    // code to execute when Vue is mounted such as fetching data when page loads
+                    fetch("data/employees.csv")
+                        .then(response => response.text())		// for handling a BadRequest response
+                        .then(csvText => {
+                            //this.message = data;
+                            const csvData = Papa.parse(csvText, {header: true}).data;
+                            this.resultList = csvData;
+                            // csvData.forEach(function(item) {
+                            //     console.log(item.FirstName + "," + item.LastName + "," + item.LogonName + "," + item.Department);
+                            // });
+                        });
+
+                },
+
+                // A list of methods separated by comma to use with Vue.
+                // The syntax to define a method is:
+                //		methodName: function(param1, param2) {},
+                methods: {
+
+
+
+                },
+            })
+
+
+            // common function to handle a BadRequest response from a Fetch API request
+            function handleResponse(response) {
+                return response.json()
+                    .then(json => {
+                        if (response.ok) {
+                            return json
+                        } else {
+                            let error = Object.assign({}, json, {
+                                status: response.status,
+                                statusText: response.statusText
+                            })
+                            return Promise.reject(error)
+                        }
+                    })
+            }
+        </script>
+
+    </ui:define>
+
+</ui:composition>
