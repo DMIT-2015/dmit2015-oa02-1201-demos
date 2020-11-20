@@ -20,6 +20,9 @@ import java.util.Optional;
 public class CourseAssignmentRepository {
 
     @Inject
+    private CourseAssignmentProgrammaticTimers assignmentProgrammaticTimers;
+
+    @Inject
     private SecurityContext securityContext;
 
     @PersistenceContext(unitName = "h2database-jpa-pu")     // The unitUnit is only needed when there are multiple persistence units defined in persistence.xml
@@ -28,6 +31,14 @@ public class CourseAssignmentRepository {
     public void add(CourseAssignment newCourseAssignment) {
         String username = securityContext.getCallerPrincipal().getName();
         newCourseAssignment.setUsername(username);
+
+//        assignmentProgrammaticTimers.createCalendarTimer(newCourseAssignment,
+//                newCourseAssignment.getDueDateTime().getYear(),
+//                newCourseAssignment.getDueDateTime().getMonth().getValue(),
+//                newCourseAssignment.getDueDateTime().getDayOfMonth(),
+//                newCourseAssignment.getDueDateTime().getHour(),
+//                newCourseAssignment.getDueDateTime().getMinute());
+
         em.persist(newCourseAssignment);
     }
 
