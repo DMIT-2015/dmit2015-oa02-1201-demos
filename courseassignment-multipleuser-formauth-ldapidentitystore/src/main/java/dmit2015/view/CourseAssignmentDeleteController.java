@@ -1,5 +1,6 @@
 package dmit2015.view;
 
+import common.interceptor.LoggingInterceptor;
 import dmit2015.model.CourseAssignment;
 import dmit2015.service.CourseAssignmentRepository;
 import lombok.Getter;
@@ -12,12 +13,18 @@ import javax.faces.annotation.ManagedProperty;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.interceptor.Interceptors;
 import java.io.Serializable;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 @Named("currentCourseAssignmentDeleteController")
 @ViewScoped
+@Interceptors(LoggingInterceptor.class)
 public class CourseAssignmentDeleteController implements Serializable {
+
+//    @Inject
+//    private Logger logger;
 
     @Inject
     private CourseAssignmentRepository assignmentRepository;

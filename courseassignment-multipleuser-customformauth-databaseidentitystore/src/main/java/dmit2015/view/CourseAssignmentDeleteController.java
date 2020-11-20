@@ -1,6 +1,5 @@
 package dmit2015.view;
 
-import common.interceptor.LoggingInterceptor;
 import dmit2015.model.CourseAssignment;
 import dmit2015.service.CourseAssignmentRepository;
 import lombok.Getter;
@@ -13,18 +12,12 @@ import javax.faces.annotation.ManagedProperty;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.interceptor.Interceptors;
 import java.io.Serializable;
 import java.util.Optional;
-import java.util.logging.Logger;
 
-@Named("currentCourseAssignmentEditController")
+@Named("currentCourseAssignmentDeleteController")
 @ViewScoped
-@Interceptors(LoggingInterceptor.class)
-public class CourseAssignmentEditController implements Serializable {
-
-//    @Inject
-//    private Logger logger;
+public class CourseAssignmentDeleteController implements Serializable {
 
     @Inject
     private CourseAssignmentRepository assignmentRepository;
@@ -38,23 +31,25 @@ public class CourseAssignmentEditController implements Serializable {
 
     @PostConstruct
     public void init() {
-        if (!Faces.isPostback()) {
+        if (!Faces.isPostback() && editId != null) {
             Optional<CourseAssignment> optionalCourseAssignment = assignmentRepository.findById(editId);
             if (optionalCourseAssignment.isPresent()) {
                 existingCourseAssignment = optionalCourseAssignment.get();
+            } else {
+                Messages.addGlobalFatal("There is no record with an id of {0} to delete.", editId);
             }
         }
     }
 
-    public String onSave() {
+    public String onDelete() {
         String nextPage = "";
         try {
-            assignmentRepository.update(existingCourseAssignment);
-            Messages.addFlashGlobalInfo("Update completed successfully.");
+            assignmentRepository.remove(existingCourseAssignment.getId());
+            Messages.addFlashGlobalInfo("Delete completed successfully.");
             nextPage = "index?faces-redirect=true";
         } catch (Exception e) {
             e.printStackTrace();
-            Messages.addGlobalError("Update completed with the error: {0}", e.getMessage());
+            Messages.addGlobalError("Delete completed with the error: {0}", e.getMessage());
         }
         return nextPage;
     }

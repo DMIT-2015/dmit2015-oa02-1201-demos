@@ -1,6 +1,5 @@
 package dmit2015.view;
 
-import common.interceptor.LoggingInterceptor;
 import dmit2015.model.CourseAssignment;
 import dmit2015.service.CourseAssignmentRepository;
 import lombok.Getter;
@@ -9,16 +8,10 @@ import org.omnifaces.util.Messages;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.interceptor.Interceptors;
-import java.util.logging.Logger;
 
 @Named("currentCourseAssignmentCreateController")
 @RequestScoped
-@Interceptors(LoggingInterceptor.class)
 public class CourseAssignmentCreateController {
-
-    @Inject
-    private Logger logger;
 
     @Inject
     private CourseAssignmentRepository assignmentRepository;
