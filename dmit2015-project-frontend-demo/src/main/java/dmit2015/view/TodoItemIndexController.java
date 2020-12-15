@@ -1,6 +1,6 @@
 package dmit2015.view;
 
-import dmit2015.backend.TodoItemResourceJaxRsClient;
+import dmit2015.service.TodoItemResourceJaxRsClient;
 import dmit2015.model.TodoItem;
 import lombok.Getter;
 

@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class TodoItemResourceTest {
+class TodoItemResourceJaxRsClientTest {
 
     TodoItemResourceJaxRsClient currentTodoItemResourceJaxRsClient = new TodoItemResourceJaxRsClient();
     String testDataResourceLocation;    // requires to add @TestInstance(TestInstance.Lifecycle.PER_CLASS) before class
@@ -82,10 +82,16 @@ class TodoItemResourceTest {
         Optional<TodoItem> optionalTodoItem = currentTodoItemResourceJaxRsClient.getOneByLocation(testDataResourceLocation);
         assertTrue(optionalTodoItem.isPresent());
         TodoItem existingTodoItem = optionalTodoItem.get();
-        boolean success = currentTodoItemResourceJaxRsClient.delete(existingTodoItem.getId());
+
+        JwtResourceJaxRsClient jwtJaxRsClient = new JwtResourceJaxRsClient();
+        Optional<String> optionalToken = jwtJaxRsClient.login("user2015","Password2015");
+        assertTrue(optionalToken.isPresent());
+        String token = optionalToken.get();
+
+        boolean success = currentTodoItemResourceJaxRsClient.delete(existingTodoItem.getId(), token);
         assertTrue(success);
 
-        success = currentTodoItemResourceJaxRsClient.delete(existingTodoItem.getId());
+        success = currentTodoItemResourceJaxRsClient.delete(existingTodoItem.getId(), token);
         assertFalse(success);
 
     }

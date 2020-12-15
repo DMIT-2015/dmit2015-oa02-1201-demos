@@ -3,6 +3,7 @@ package dmit2015.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -10,6 +11,7 @@ import javax.validation.constraints.NotBlank;
 @Entity
 @Getter @Setter
 @NoArgsConstructor
+@ToString()
 public class TodoItem {
 
     @Id                 // This is the primary key field
