@@ -30,27 +30,27 @@ import java.util.Optional;
  @ApplicationPath("/webapi")
  @LoginConfig(authMethod="MP-JWT", realmName="MP JWT Realm")
  @DeclareRoles({"ROLE1","ROLE2","ROLE3"})
- public class App extends Application { }
+ public class JAXRSConfiguration extends Application { }
 
   * Step 4: Add/update the Microprofile Config properties file 'microprofile-config.properties' file that is located in the
   * 'src/main/resources/META-INF' folder with the following content
  mp.jwt.verify.publickey.location=META-INF/public.pem
  mp.jwt.verify.issuer=quickstart-jwt-issuer
 
-curl -i http://localhost:8080/dmit2015-project-backend-start/webapi/jwt/formLogin/ \
+curl -i http://localhost:8080/dmit2015-project-backend-demo/webapi/jwt/formLogin/ \
 	-d 'j_username=user2015&j_password=Password2015' \
 	-H 'Content-Type:application/x-www-form-urlencoded'
 
- curl -i http://localhost:8080/dmit2015-project-backend-start/webapi/jwt/jsonLogin/ \
+ curl -i http://localhost:8080/dmit2015-project-backend-demo/webapi/jwt/jsonLogin/ \
 	-d '{"username":"user2015","password":"Password2015"}' \
 	-H 'Content-Type:application/json'
 
 
- curl -i http://localhost:8080/dmit2015-project-backend-start/webapi/jwt/jsonLogin/ \
+ curl -i http://localhost:8080/dmit2015-project-backend-demo/webapi/jwt/jsonLogin/ \
 	-d '{"username":"admin2015","password":"Password2015"}' \
 	-H 'Content-Type:application/json'
 
- curl -i http://localhost:8080/dmit2015-project-backend-start/webapi/jwt/jsonLogin/ \
+ curl -i http://localhost:8080/dmit2015-project-backend-demo/webapi/jwt/jsonLogin/ \
  -d '{"username":"useradmin2015","password":"Password2015"}' \
  -H 'Content-Type:application/json'
 
